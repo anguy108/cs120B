@@ -1,11 +1,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
-#include <string.h>
-#include "/Users/antho_000/Documents/Atmel Studio/7.0/header files/io.c"
-#include "/Users/antho_000/Documents/Atmel Studio/7.0/header files/usart_ATmega1284.h"
-#include "/Users/antho_000/Documents/Atmel Studio/7.0/header files/bit.h"
-#include "/Users/antho_000/Documents/Atmel Studio/7.0/header files/keypad.h"
 #include "/Users/antho_000/Documents/Atmel Studio/7.0/header files/timer.h"
 
 typedef struct task{
@@ -16,6 +11,9 @@ typedef struct task{
 };
 
 #define led_output PORTA
+
+ennum Buttton_State 
+int Busson_Sm ()
 
 enum LED_States{LED_Off, LED_On};
 
@@ -31,6 +29,7 @@ int LED_SM(int state) {
     		state = LED_On;
     		break;
 	}
+	return state;
 }
 
 int main() {
@@ -45,8 +44,7 @@ int main() {
 	
 	struct task *taskArry[numTask];
 	
-	//Ari helped me with this part of the code. An easier/cleaner way to initialize the properties
-	struct task task1 = (struct task){LED_Off, 100, 0, &LED_SM};
+	struct task task1 = (struct task){LED_On, 500, 0, &LED_SM};
 	taskArry[0] = &task1;
 	
 	while(1){
